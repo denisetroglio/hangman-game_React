@@ -4,8 +4,8 @@ const ErrorLetters = (props) => {
       .filter((eachLetter) => {
         return !props.wordLetters.includes(eachLetter);
       })
-      .map((eachLetter) => {
-        return <li className='letter'>{eachLetter}</li>;
+      .map((eachLetter, index) => {
+        return <li key={index} className='letter'>{eachLetter}</li>;
       });
   };
 
