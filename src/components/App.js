@@ -4,6 +4,7 @@ import Header from "./Header";
 import Dummy from "./Dummy";
 import ErrorLetters from "./ErrorLetters";
 import SolutionLetters from "./SolutionLetters";
+import Form from "./Form";
 
 function App() {
   const [word, setWord] = useState("katakroker");
@@ -12,15 +13,25 @@ function App() {
 
   const wordLetters = word.split("");
 
-  const handleLastLetter = (ev) => {
+  const changeForm = (value) => {
     if (
-      ev.target.value.match(/^[a-zA-ZáäéëíïóöúüÁÄÉËÍÏÓÖÚÜñÑ]/) &&
-      !userLetters.includes(ev.target.value)
+      value.match(/^[a-zA-ZáäéëíïóöúüÁÄÉËÍÏÓÖÚÜñÑ]/) &&
+      !userLetters.includes(value)
     ) {
-      setLastLetter(ev.currentTarget.value);
-      setUserLetters([...userLetters, ev.currentTarget.value]);
+      setLastLetter(value);
+      setUserLetters([...userLetters, value]);
     }
-  };
+  }
+
+  // const handleLastLetter = (ev) => {
+  //   if (
+  //     ev.target.value.match(/^[a-zA-ZáäéëíïóöúüÁÄÉËÍÏÓÖÚÜñÑ]/) &&
+  //     !userLetters.includes(ev.target.value)
+  //   ) {
+  //     setLastLetter(ev.currentTarget.value);
+  //     setUserLetters([...userLetters, ev.currentTarget.value]);
+  //   }
+  // };
 
   return (
     <div id='root'>
@@ -42,7 +53,8 @@ function App() {
                 wordLetters={wordLetters}
               />
             </div>
-            <form className='form'>
+            <Form changeForm={changeForm} />
+            {/* <form className='form'>
               <label className='title' htmlFor='last-letter'>
                 Escribe una letra:
               </label>
@@ -56,7 +68,7 @@ function App() {
                 // value={lastLetter}
                 onChange={handleLastLetter}
               />
-            </form>
+            </form> */}
           </section>
           {/* <button onClick={handleError}>test</button> */}
           <Dummy userLetters={userLetters} wordLetters={wordLetters} />
