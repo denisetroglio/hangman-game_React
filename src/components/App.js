@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import "../styles/App.scss";
 import { useState } from "react";
 import Header from "./Header";
@@ -5,6 +6,7 @@ import Dummy from "./Dummy";
 import ErrorLetters from "./ErrorLetters";
 import SolutionLetters from "./SolutionLetters";
 import Form from "./Form";
+import Footer from "./Footer";
 
 function App() {
   const [word, setWord] = useState("katakroker");
@@ -21,7 +23,7 @@ function App() {
       setLastLetter(value);
       setUserLetters([...userLetters, value]);
     }
-  }
+  };
 
   // const handleLastLetter = (ev) => {
   //   if (
@@ -73,6 +75,12 @@ function App() {
           {/* <button onClick={handleError}>test</button> */}
           <Dummy userLetters={userLetters} wordLetters={wordLetters} />
         </main>
+
+
+        <Footer>
+          
+        </Footer>
+
       </div>
     </div>
   );
