@@ -1,4 +1,5 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
+import { NavLink, Route, Switch } from "react-router-dom";
 import "../styles/App.scss";
 import { useState } from "react";
 import Header from "./Header";
@@ -7,6 +8,8 @@ import ErrorLetters from "./ErrorLetters";
 import SolutionLetters from "./SolutionLetters";
 import Form from "./Form";
 import Footer from "./Footer";
+import Instructions from "./Instructions";
+import Options from "./Options";
 
 function App() {
   const [word, setWord] = useState("katakroker");
@@ -40,23 +43,7 @@ function App() {
       <div className='page'>
         <Header />
         <main className='main'>
-          <section>
-            <div className='solution'>
-              <h2 className='title'>Solución:</h2>
-              <SolutionLetters
-                wordLetters={wordLetters}
-                userLetters={userLetters}
-              />
-            </div>
-            <div className='error'>
-              <h2 className='title'>Letras falladas:</h2>
-              <ErrorLetters
-                userLetters={userLetters}
-                wordLetters={wordLetters}
-              />
-            </div>
-            <Form changeForm={changeForm} />
-            {/* <form className='form'>
+          {/* <form className='form'>
               <label className='title' htmlFor='last-letter'>
                 Escribe una letra:
               </label>
@@ -71,16 +58,41 @@ function App() {
                 onChange={handleLastLetter}
               />
             </form> */}
-          </section>
+
           {/* <button onClick={handleError}>test</button> */}
+
+          <Switch>
+            <Route exact path='/'>
+              <section>
+                <div className='solution'>
+                  <h2 className='title'>Solución:</h2>
+                  <SolutionLetters
+                    wordLetters={wordLetters}
+                    userLetters={userLetters}
+                  />
+                </div>
+                <div className='error'>
+                  <h2 className='title'>Letras falladas:</h2>
+                  <ErrorLetters
+                    userLetters={userLetters}
+                    wordLetters={wordLetters}
+                  />
+                </div>
+
+                <Form changeForm={changeForm} />
+              </section>
+            </Route>
+            <Route exact path='/instructions'>
+              <Instructions />
+            </Route>
+            <Route exact path='/Options'>
+              <Options />
+            </Route>
+          </Switch>
+
           <Dummy userLetters={userLetters} wordLetters={wordLetters} />
         </main>
-
-
-        <Footer>
-          
-        </Footer>
-
+        <Footer></Footer>
       </div>
     </div>
   );
