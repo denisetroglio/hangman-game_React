@@ -10,16 +10,20 @@ import Form from "./Form";
 import Footer from "./Footer";
 import Instructions from "./Instructions";
 import Options from "./Options";
+import Loading from "./Loading"
 import callToApi from "../services/Api"
 
 function App() {
   const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
   const [lastLetter, setLastLetter] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     callToApi().then((responseData) => {
       setWord(responseData.body.Word);
+      setIsLoading(false);
     });
   }, []);
 
@@ -35,46 +39,19 @@ function App() {
     }
   };
 
-
-
-  // const handleLastLetter = (ev) => {
-  //   if (
-  //     ev.target.value.match(/^[a-zA-ZáäéëíïóöúüÁÄÉËÍÏÓÖÚÜñÑ]/) &&
-  //     !userLetters.includes(ev.target.value)
-  //   ) {
-  //     setLastLetter(ev.currentTarget.value);
-  //     setUserLetters([...userLetters, ev.currentTarget.value]);
-  //   }
-  // };
-
   return (
     <div id='root'>
       <div className='page'>
         <Header />
         <main className='main'>
-          {/* <form className='form'>
-              <label className='title' htmlFor='last-letter'>
-                Escribe una letra:
-              </label>
-              <input
-                autoComplete='off'
-                className='form__input'
-                maxLength='1'
-                type='text'
-                name='last-letter'
-                id='last-letter'
-                // value={lastLetter}
-                onChange={handleLastLetter}
-              />
-            </form> */}
-
-          {/* <button onClick={handleError}>test</button> */}
+          <Loading loading={isLoading}></Loading>
 
           <Switch>
             <Route exact path='/'>
               <section>
                 <div className='solution'>
                   <h2 className='title'>Solución:</h2>
+
                   <SolutionLetters
                     wordLetters={wordLetters}
                     userLetters={userLetters}
