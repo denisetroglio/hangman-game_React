@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import { NavLink, Route, Switch } from "react-router-dom";
 import "../styles/App.scss";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 import Header from "./Header";
 import Dummy from "./Dummy";
 import ErrorLetters from "./ErrorLetters";
@@ -10,11 +10,18 @@ import Form from "./Form";
 import Footer from "./Footer";
 import Instructions from "./Instructions";
 import Options from "./Options";
+import callToApi from "../services/Api"
 
 function App() {
-  const [word, setWord] = useState("katakroker");
+  const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
   const [lastLetter, setLastLetter] = useState();
+
+  useEffect(() => {
+    callToApi().then((responseData) => {
+      setWord(responseData.body.Word);
+    });
+  }, []);
 
   const wordLetters = word.split("");
 
@@ -27,6 +34,8 @@ function App() {
       setUserLetters([...userLetters, value]);
     }
   };
+
+
 
   // const handleLastLetter = (ev) => {
   //   if (
