@@ -1,7 +1,7 @@
-const SolutionLetters = (props) => {
+const SolutionLetters = ({ wordLetters, userLetters }) => {
   const renderSolutionLetters = () => {
-    return props.wordLetters.map((eachLetter, index) => {
-      if (props.userLetters.includes(eachLetter)) {
+    return wordLetters.map((eachLetter, index) => {
+      if (userLetters.includes(eachLetter)) {
         return <li key={index} className='letter'>{eachLetter}</li>;
       } else {
         return <li key={index} className='letter'></li>;
